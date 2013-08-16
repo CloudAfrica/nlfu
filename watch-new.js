@@ -2,7 +2,7 @@ var fs = require('fs');
 var send = require('./send_udp');
 
 var dirname = process.argv[2];
-if (dirname[dirname.length -1] != '/') s += '/';
+if (dirname[dirname.length -1] != '/') dirname += '/';
 
 var files = {};
 var monitoredfiles = [];
