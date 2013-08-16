@@ -1,4 +1,5 @@
 var fs = require('fs');
+var send = require('./send_udp');
 
 //fs.watch('/tmp', function (event, filename) {
 //  console.log('event is: ' + event);
@@ -9,7 +10,7 @@ var fs = require('fs');
 //  }
 //});
 
-var filename = '/tmp/message.text';
+var filename = process.argv[2];
 
 fs.watchFile(filename, function (curr, prev) {
   console.log('the current size is: ' + curr.size);
@@ -23,6 +24,7 @@ fs.watchFile(filename, function (curr, prev) {
     for (var i = 0; i < lines.length; i++) {
       if (lines[i].length > 0) {
         console.log('[' + lines[i] + ']');
+        send(lines[i]);
       }
     }
   });
