@@ -9,7 +9,7 @@ fs.watch(dirname, function (event, filename) {
   if (filename) {
     if (files.indexOf(filename) == -1) {
       files.push(filename);
-      monitorFile(filename);
+      monitorFile(dirname + '/' + filename);
     }
   }
 });
