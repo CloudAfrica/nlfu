@@ -2,6 +2,7 @@ var fs = require('fs');
 var send = require('./send_udp');
 
 var dirname = process.argv[2];
+if (dirname[dirname.length -1] != '/') s += '/';
 
 var files = {};
 var monitoredfiles = [];
@@ -9,14 +10,14 @@ var monitoredfiles = [];
 var syncfile = fs.readdirSync(dirname);
 
 for (var i = 0; i < syncfile.length; i++) {
-	var stats = fs.statSync(dirname+syncfile);
-	files[filename] = stats.size();
+	var stats = fs.statSync(dirname+syncfile[i]);
+	files[syncfile[i]] = stats.size;
 }
 	
 fs.watch(dirname, function (event, filename) {
   if (filename) {
     if (monitoredfiles.indexOf(filename) == -1) {
-      monitoredfiles.push(filename);
+      monitoredfiles.push(filename,size);
       monitorFile(dirname + '/' + filename);
     }
   }
