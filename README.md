@@ -1,4 +1,5 @@
 nlfu
 ====
 
-node file watch and post to logstash upp
+node file watch and post to logstash app
+
