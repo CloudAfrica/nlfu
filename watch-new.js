@@ -17,8 +17,8 @@ for (var i = 0; i < syncfile.length; i++) {
 fs.watch(dirname, function (event, filename) {
   if (filename) {
     if (monitoredfiles.indexOf(filename) == -1) {
-      monitoredfiles.push(filename,size);
-      monitorFile(dirname + '/' + filename);
+      monitoredfiles.push(filename);
+      monitorFile(dirname + filename,files[filename]);
     }
   }
 });
@@ -28,7 +28,7 @@ var monitorFile = function (filename,size) {
   fs.watchFile(filename, function (curr, prev) {
     console.log('the current size is: ' + curr.size);
     console.log('the previous size was: ' + prev.size);
-    var stream = fs.createReadStream(filename, {autoClose: true, start: prev.size});
+    var stream = fs.createReadStream(filename, {autoClose: true, start: size});
     stream.addListener("data", function (lines) {
       lines = lines.toString('utf-8');
       lines = lines.split("\n");
