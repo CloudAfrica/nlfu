@@ -1,23 +1,12 @@
 var fs = require('fs');
 var send = require('./send_udp');
 
-//fs.watch('/tmp', function (event, filename) {
-//  console.log('event is: ' + event);
-//  if (filename) {
-//    console.log('filename provided: ' + filename);
-//  } else {
-//    console.log('filename not provided');
-//  }
-//});
-
 var filename = process.argv[2];
 
 fs.watchFile(filename, function (curr, prev) {
   console.log('the current size is: ' + curr.size);
   console.log('the previous size was: ' + prev.size);
-
-  var stream = fs.createReadStream(filename, {autoClose: true, start: prev.size}); //, {start: start, end: stats.size});
-
+  var stream = fs.createReadStream(filename, {autoClose: true, start: prev.size});
   stream.addListener("data", function (lines) {
     lines = lines.toString('utf-8');
     lines = lines.split("\n");
