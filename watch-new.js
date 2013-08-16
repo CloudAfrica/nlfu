@@ -9,6 +9,9 @@ var monitoredfiles = [];
 var syncfile = fs.readdirSync(dirname);
 
 for (var i = 0; i < syncfile.length; i++) {
+	var stats = fs.statSync(dirname+syncfile);
+	files[filename] = stats.size();
+}
 	
 fs.watch(dirname, function (event, filename) {
   if (filename) {
